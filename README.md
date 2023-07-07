@@ -42,26 +42,20 @@ $: java Main.java text "4B 68 6F 6F 72 20 7A 72 75 6F 67" caesar -3
 
 
 
+**Titre : Global Converter - Un système complet de conversion de bases textuelles et numériques**
 
+Le projet Global Converter est une application Java qui permet aux utilisateurs de convertir une chaîne de valeurs textuelles ou numériques d'une base à une autre. Les bases prises en charge comprennent le binaire, le décimal, l'octal, l'hexadécimal et même le texte brut. En outre, l'application prend également en charge l'utilisation d'algorithmes de chiffrement, tels que le chiffrement de César, pour crypter le texte d'entrée avant la conversion.
 
-**Title: Global Converter - A Comprehensive Text and Numerical Base Conversion System**
+**Composants clés:**
 
-The Global Converter project is a Java-based application that allows users to convert a string of text or numerical values from one base to another. The supported bases include binary, decimal, octal, hexadecimal, and even plain text. Furthermore, the application also supports the use of cipher algorithms, such as the Caesar cipher, to encrypt the input text before conversion.
+*1. Validation de l'entrée utilisateur:*
+L'application requiert au moins deux arguments de la part de l'utilisateur : la base à partir de laquelle la conversion doit être effectuée et le texte ou les valeurs numériques à convertir. Un algorithme et une clé de cryptage facultatifs peuvent également être fournis. La classe "Validate" est utilisée pour garantir la validité de ces entrées. Si une entrée est invalide ou insuffisante, un message d'erreur s'affiche et le programme se termine.
 
-**Key Components:**
-
-*1. User Input Validation:*
-The application requires at least two arguments from the user; the base to convert from, and the text or numerical values to convert. An optional encryption algorithm and key may also be provided. The 'Validate' class is used to ensure the validity of these inputs. If any input is invalid or insufficient, an error message is displayed and the program exits.
-
-*2. Encryption:*
-The application supports the use of encryption algorithms on the input before conversion. The 'EncodingStrategyFactory' class is used to select the right encoding strategy based on user input. Currently, the Caesar cipher is implemented, but other ciphers could easily be added due to the system's modular design. If no encryption algorithm is provided, the system defaults to a 'defaultEncoding', which leaves the input unchanged.
+*2. Cryptage:*
+L'application prend en charge l'utilisation d'algorithmes de cryptage sur l'entrée avant la conversion. La classe 'EncodingStrategyFactory' est utilisée pour sélectionner la bonne stratégie d'encodage en fonction des données de l'utilisateur. Actuellement, le chiffrement Caesar est implémenté, mais d'autres chiffrages peuvent être facilement ajoutés grâce à la conception modulaire du système. Si aucun algorithme de cryptage n'est fourni, le système utilise par défaut un "defaultEncoding", qui laisse l'entrée inchangée.
 
 *3. Conversion:*
-The core functionality of the application lies in its conversion strategies. Depending on the base provided by the user, an appropriate conversion strategy is chosen. The 'Ascii' class is used to convert input text to ASCII, which then serves as the input for these strategies. Each base (binary, decimal, octal, hexadecimal, and text) has its own conversion strategy, implemented using a 'ConversionStrategy' interface.
+La fonctionnalité principale de l'application réside dans ses stratégies de conversion. En fonction de la base fournie par l'utilisateur, une stratégie de conversion appropriée est choisie. La classe 'Ascii' est utilisée pour convertir le texte d'entrée en ASCII, qui sert ensuite d'entrée à ces stratégies. Chaque base (binaire, décimale, octale, hexadécimale et texte) possède sa propre stratégie de conversion, mise en œuvre à l'aide de l'interface "ConversionStrategy".
 
-*4. Output:*
-The converted string is then printed to the console. If the input was encrypted, the output will be the encrypted form of the original input, converted to the specified base.
-
-The project demonstrates strong use of object-oriented principles, including encapsulation, polymorphism, and inheritance, and employs the Strategy design pattern to allow for easy addition of new conversion or encoding strategies. It also handles user input and potential errors robustly, making for a versatile and user-friendly application.
-
-With further development, this project could be expanded to support more bases for conversion, additional encryption algorithms, or even a GUI to improve user experience.
+*4. Sortie:*
+La chaîne convertie est ensuite imprimée sur la console. Si l'entrée était cryptée, la sortie sera la forme cryptée de l'entrée originale, convertie dans la base spécifiée.
