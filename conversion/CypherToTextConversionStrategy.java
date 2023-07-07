@@ -1,15 +1,34 @@
 package conversion;
+
 import java.util.Scanner;
+
+import encoding.EncodingStrategy;
+import encoding.EncodingStrategyFactory;
 import validate.Validate;
 
-public class TextConversionStrategy implements ConversionStrategy {
-    @Override
-    public String convert(String ascii) {
+public class CypherToTextConversionStrategy {
 
+    public String convertToText(String ascii, int key) {
+
+            // in case the key is not negative the cyphing has been already done
+            if (key >= 0) {
+                return ascii;
+            }
+            
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("entrer la base d'encodage de votre chaine(ex. hexadecimal, octal etc..): ");
+            System.out.println("entrer la base d'encodage de votre chaine(ex hexadecimal, octal etc...):  ");
             String reverseBase = scanner.nextLine();
+
+            // inst new EncodingStrategyFactory
+            EncodingStrategyFactory encodingFactory = new EncodingStrategyFactory();
+
+            String encodingAlgo = "caesar";
+            // get the right encoding strategy
+            EncodingStrategy encodingStrategy = encodingFactory.getStrategy(encodingAlgo);
+
+            // encode the validated input
+            ascii = encodingStrategy.encode(ascii , key);
 
             // inst new Validate 
             Validate val = new Validate();
@@ -25,8 +44,8 @@ public class TextConversionStrategy implements ConversionStrategy {
 
             switch (reverseBase) {
                 case "text":
-                    // In case of 'text', we don't need any decoding.
-                    return ascii;
+                    decodeStrategy = new DecodeText();
+                    break;
                 // case for BINARY decoding
                 case "binary":
                     decodeStrategy = new DecodeBinary();
@@ -63,4 +82,5 @@ public class TextConversionStrategy implements ConversionStrategy {
 
         return decodedString;
     }
+    
 }

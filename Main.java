@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import ascii.Ascii;
 import conversion.*;
@@ -39,57 +41,31 @@ public class Main {
             System.exit(1);
         }
 
-        // check if key is null 
-        if( key == 0 ){
-        Scanner scanner = new Scanner(System.in);
-                
-                System.out.print("Continuer sans algo de chiffrement ni cle? ['y' ou 'n']: ");
-                String response = scanner.nextLine();
-                
-                if (response.equalsIgnoreCase("y")) {
-                    encodingAlgo = "defaultEncoding";
-                } else if (response.equalsIgnoreCase("n")) {
-                    System.out.println("ERROR - exemple d'utilisation: java Main.java <base> <text> [<encodingAlgo> <key>]");
-                    System.exit(1);
-                } else {
-                    System.out.println("Reponse invalide.");
-                }
-                
-                scanner.close();
-        }
-
-
-
         // inst new Ascii
         Ascii ascii = new Ascii();
 
-        // init testAlgo
-        boolean textAlgo = false;
+        // if encodingAlgo is not default, encode the input
+        if (!encodingAlgo.equals("defaultEncoding")) {
 
-        // Declare asciiText 
-        String asciiText;
+            System.out.println("Chiffrement: " + encodingAlgo);
+            // inst new EncodingStrategyFactory
+            EncodingStrategyFactory encodingFactory = new EncodingStrategyFactory();
 
-            if( encodingAlgo == "defaultEncoding"){
-                asciiText = ascii.textToASCII(validatedInput);
+            // get the right encoding strategy
+            EncodingStrategy encodingStrategy = encodingFactory.getStrategy(encodingAlgo);
 
-            } else {
+            System.out.println(validatedInput);
+            // encode the validated input
 
-                // inst new EncodingStrategyFactory
-                EncodingStrategyFactory encodingFactory = new EncodingStrategyFactory();
-
-                // get the right encoding strategy
-                EncodingStrategy encodingStrategy = encodingFactory.getStrategy(encodingAlgo);
-
-                // encode the validated input
-                String encodedText = encodingStrategy.encode(validatedInput , key);
-                // translate validated input to ascii
-                asciiText = ascii.textToASCII(encodedText);
-
-                // Set the bool for algo strategy in case the string is a text
-                textAlgo = true;
-            }
+            validatedInput = encodingStrategy.encode(validatedInput , key);
 
 
+        } else {
+            System.out.println("Encodage de default, aucun chiffrement selectionne");
+        }
+
+        // translate validated input to ascii
+        String asciiText = ascii.textToASCII(validatedInput);
 
         // Choose conversion strategy based on base
         ConversionStrategy conversionStrategy;
@@ -97,10 +73,6 @@ public class Main {
 
         switch (validatedBase) {
             case "text":
-                if( textAlgo  != true){
-                  conversionStrategy = new TextConversionStrategy();
-                  break;
-                }
                 conversionStrategy = new TextConversionStrategy();
                 textBool = true;
                 break;
@@ -108,7 +80,7 @@ public class Main {
             case "binary":
                 conversionStrategy = new BinaryConversionStrategy();
                 break;
-             // case for DECIMAL
+            // case for DECIMAL
             case "decimal":
                 conversionStrategy = new DecimalConversionStrategy();
                 break;
@@ -122,7 +94,7 @@ public class Main {
                 break;
             // if strategy doesn't exist throw an error, normally, it already exists at this point
             default:
-                 // feed a default value then exit to avoid exceptions
+                // feed a default value then exit to avoid exceptions
                 conversionStrategy = null;
         }
 
@@ -132,25 +104,26 @@ public class Main {
         }
 
         // Convert it
-        String convertedString = (textBool != true) ? conversionStrategy.convert(asciiText) : conversionStrategy.convert(validatedInput);
+        String convertedString;
+        if (textBool != true) {
+            convertedString = conversionStrategy.convert(asciiText);
+        } else {
+            if(key >= 0){
+                CypherToTextConversionStrategy decyphIt = new CypherToTextConversionStrategy();
+                convertedString = decyphIt.convertToText(validatedInput, key);
+
+                // oneline cause i m lazy
+                convertedString = Arrays.stream(asciiText.split(" "))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(Character::toString)
+                .collect(Collectors.joining());
+
+            } else {
+                convertedString = conversionStrategy.convert(validatedInput);
+            }
+        }
 
         // print the results
         System.out.println(convertedString);
-
     }
 }
-
-
-
-/*
-                // if is a text base
-        if(validatedBase.equals("text")){
-            conversionStrategy = new TextConversionStrategy();
-
-            System.out.print("entrer la base desideree: ");
-            String reverseBase = scanner.nextLine();
-        } 
-
-
-
- */

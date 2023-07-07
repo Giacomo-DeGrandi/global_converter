@@ -13,19 +13,32 @@ public class Validate {
     }
 
 
-    public String validateBase(String args){
-        if (args == null || args.length() == 0 || 
-                (!args.equals("hexadecimal") && !args.equals("octal") && 
-                !args.equals("decimal") && !args.equals("binary") && 
-                !args.equals("text")
-                )
-            ) {
-                
-                return null;
+    public String validateBase(String args) {
+        if (args == null || args.length() == 0) {
+            return null;
+        }
 
-            }
-        return args;
+        switch (args) {
+            case "text":
+            case "-t":
+                return "text";
+            case "binary":
+            case "-b":
+                return "binary";
+            case "decimal":
+            case "-d":
+                return "decimal";
+            case "octal":
+            case "-o":
+                return "octal";
+            case "hexadecimal":
+            case "-h":
+                return "hexadecimal";
+            default:
+                return null;
+        }
     }
+
 
     public String validateBinary(String binary){
 
@@ -79,6 +92,7 @@ public class Validate {
 
         // split by space
         String[] parts = hex.split(" ");
+
         // iterate decimal val
         for (String singleHex : parts) {
             if (!singleHex.matches("^([0-9A-Fa-f]{2} )*[0-9A-Fa-f]{2}$")) {

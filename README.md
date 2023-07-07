@@ -1,3 +1,37 @@
+**Current Conversions**
+
+hexadecimal -h
+decimal -d
+octal -o
+binary -b
+text -t
+
+**Current Algos**
+
+Caesar = "caesar"      utilisation: $: java Main.java text "Hello world" caesar 3
+
+**Usage Exemples**
+
+$: java Main.java binary "Hello world"  
+>> 1001000 1100101 1101100 1101100 1101111 100000 1110111 1101111 1110010 1101100 1100100    
+
+$: java Main.java hexadecimal "Hello world"
+>> 48 65 6C 6C 6F 20 77 6F 72 6C 64
+
+$: java Main.java text "48 65 6C 6C 6F 20 77 6F 72 6C 64"
+>> Q.: entrer la base d'encodage de votre chaine(ex hexadecimal, octal etc...):  hexadecimal
+>> Hello world
+
+$: java Main.java text "Hello world" caesar 3
+>> Khoor zruog
+
+$: java Main.java hexadecimal "Hello world" caesar 3
+>> 4B 68 6F 6F 72 20 7A 72 75 6F 67 (hex pas valide)
+
+
+
+
+
 **Title: Global Converter - A Comprehensive Text and Numerical Base Conversion System**
 
 The Global Converter project is a Java-based application that allows users to convert a string of text or numerical values from one base to another. The supported bases include binary, decimal, octal, hexadecimal, and even plain text. Furthermore, the application also supports the use of cipher algorithms, such as the Caesar cipher, to encrypt the input text before conversion.

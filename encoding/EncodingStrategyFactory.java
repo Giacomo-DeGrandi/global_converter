@@ -14,7 +14,7 @@ public class EncodingStrategyFactory{
             default:
 
                 System.out.println("ERROR: inserer une algo de chiffrement valid");
-                System.out.println("OPTIONS: caesar, ROT13 ");
+                System.out.println("OPTIONS: Caesar ");
                 System.out.println("ERROR - exemple d'utilisation: java Main.java <base> <text> [<encodingAlgo> <key>]");
                 System.exit(1);
                 return null;
