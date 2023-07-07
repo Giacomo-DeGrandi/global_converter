@@ -27,7 +27,7 @@ $: java Main.java text "Hello world" caesar 3
 >> Khoor zruog
 
 $: java Main.java hexadecimal "Hello world" caesar 3
->> 4B 68 6F 6F 72 20 7A 72 75 6F 67 (sur l exo il y a un graphique, page 6: la conversion dans l image represent la conversion hexadecimale sans utilisation d'algo de chiffrement et pas avec )
+>> 4B 68 6F 6F 72 20 7A 72 75 6F 67 (sur l exo tous les graphique ont le meme resultat: la conversion dans l image represent la conversion hexadecimale sans utilisation d'algo de chiffrement et pas avec )
 
 $: java Main.java text "Khoor zruog" caesar -3
 >> Q.: entrer la base d'encodage de votre chaine(ex hexadecimal, octal etc...):  *text*
