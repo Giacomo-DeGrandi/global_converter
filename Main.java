@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import ascii.Ascii;
 import conversion.*;
 import validate.Validate;
@@ -39,9 +41,21 @@ public class Main {
 
         // check if key is null 
         if( key == 0 ){
-            System.out.println("ERROR: inserer une cle de chiffrement");
-            System.out.println("ERROR - exemple d'utilisation: java Main.java <base> <text> [<encodingAlgo> <key>]");
-            System.exit(1);
+        Scanner scanner = new Scanner(System.in);
+                
+                System.out.print("Continuer sans algo de chiffrement ni cle? ['y' ou 'n']: ");
+                String response = scanner.nextLine();
+                
+                if (response.equalsIgnoreCase("y")) {
+                    encodingAlgo = "defaultEncoding";
+                } else if (response.equalsIgnoreCase("n")) {
+                    System.out.println("ERROR - exemple d'utilisation: java Main.java <base> <text> [<encodingAlgo> <key>]");
+                    System.exit(1);
+                } else {
+                    System.out.println("Reponse invalide.");
+                }
+                
+                scanner.close();
         }
 
 
