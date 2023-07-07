@@ -1,3 +1,5 @@
+COMPILE:   <h4> javac validate/*.java encoding/*.java conversion/*.java Main.java </h4>
+
 **Current Conversions**
 
 hexadecimal -h
