@@ -20,6 +20,7 @@ $: java Main.java hexadecimal "Hello world"
 
 $: java Main.java text "48 65 6C 6C 6F 20 77 6F 72 6C 64"
 >> Q.: entrer la base d'encodage de votre chaine(ex hexadecimal, octal etc...):  *hexadecimal*
+
 >> Hello world
 
 $: java Main.java text "Hello world" caesar 3
@@ -30,11 +31,13 @@ $: java Main.java hexadecimal "Hello world" caesar 3
 
 $: java Main.java text "Khoor zruog" caesar -3
 >> Q.: entrer la base d'encodage de votre chaine(ex hexadecimal, octal etc...):  *text*
+
 >> Hello world
 
 ( ça ça ne marche pas )
 $: java Main.java text "4B 68 6F 6F 72 20 7A 72 75 6F 67" caesar -3
 >> Q.: entrer la base d'encodage de votre chaine(ex hexadecimal, octal etc...):  *hexadecimal*
+
 >> ERROR: La chaine hexadecimale inseree n'est pas valide
 
 
